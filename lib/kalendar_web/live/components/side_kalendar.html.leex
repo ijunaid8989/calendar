@@ -1,0 +1,19 @@
+<div>
+  <div><%= @kalendar.days_in_month %></div>
+  <div><%= @kalendar.month %></div>
+  <div><%= @kalendar.year %></div>
+  <div><%= @kalendar.days_in_next_month %></div>
+</div>
+<div>============================</div>
+<div>
+  <div
+    phx-click="next_month"
+    phx-value-month="<%= @kalendar.month_number %>"
+    phx-value-year="<%= @kalendar.year %>"
+    phx-value-day="<%= @kalendar.day %>"
+    phx-target="<%= @myself %>"
+  >
+    NEXT
+  </div>
+  <div phx-click="prev_month" phx-value-month="<%= @kalendar.month %>" phx-target="<%= @myself %>">PREV</div>
+</div>
