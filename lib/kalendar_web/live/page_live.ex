@@ -61,7 +61,7 @@ defmodule KalendarWeb.PageLive do
       %{
         day: Calendar.Strftime.strftime!(date, "%d"),
         class: (if current_month == Calendar.Strftime.strftime!(date, "%B"), do: "in-month", else: "text-muted"),
-        current_day: (if current_day == Calendar.Strftime.strftime!(date, "%d"), do: true, else: false)
+        current: (if current_day == Calendar.Strftime.strftime!(date, "%d") && current_month == Calendar.Strftime.strftime!(date, "%B"), do: "current", else: "")
       }
     end)
   end

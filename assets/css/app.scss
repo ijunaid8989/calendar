@@ -6,7 +6,7 @@
 
 
 .sideKalendar {
-  width: 270px;
+  width: 225px;
 }
 
 .sideKalendar .float-left {
@@ -28,16 +28,19 @@
 }
 
 .sideKalendar .weekday-head {
-  font-size: 12px;
-  margin: 5px 12px;
+  font-size: 10px;
+  margin: 5px 10.25px;
 }
 
 .sideKalendar .weekday {
-  font-size: 12px;
-  width: 26px;
-  height: 35px;
-  margin-left: 10px;
+  font-size: 10px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  margin: 0px 3.25px;
   float: left;
+  transition: background-color 100ms linear;
 }
 
 .sidebar {
@@ -50,4 +53,10 @@
 
 .in-month {
   font-weight: 500;
+}
+
+.current {
+  background-color: #1a73e8;
+  color: #fff;
+  border-radius: 50%;
 }
