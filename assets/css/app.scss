@@ -29,7 +29,12 @@
 
 .sideKalendar .weekday-head {
   font-size: 10px;
+  font-weight: 500;
   margin: 5px 10.25px;
+}
+
+.sideKalendar .card-title {
+  margin-bottom: 5px
 }
 
 .sideKalendar .weekday {
