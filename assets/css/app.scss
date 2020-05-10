@@ -3,3 +3,45 @@
 @import "../node_modules/nprogress/nprogress.css";
 
 @import '../node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
+
+
+.sideKalendar {
+  width: 260px;
+}
+
+.sideKalendar .float-left {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.sideKalendar .float-right .material-icons {
+  font-size: 14px;
+}
+
+.sideKalendar .card-header {
+  padding: 5px 10px;
+}
+
+.sideKalendar .card-body {
+  padding: 5px;
+}
+
+.sideKalendar .weekday-head {
+  font-size: 12px;
+  margin: 5px 12px;
+}
+
+.sideKalendar .weekday {
+  font-size: 12px;
+  margin: 0px 9px;
+  padding: 0.5px;
+}
+
+.sidebar {
+  width: 300px;
+}
+
+.full-container {
+  width: calc(100% - 300px);
+}

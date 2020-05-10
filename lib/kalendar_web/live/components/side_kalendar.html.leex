@@ -1,19 +1,55 @@
-<div>
-  <div><%= @kalendar.days_in_month %></div>
-  <div><%= @kalendar.month %></div>
-  <div><%= @kalendar.year %></div>
-  <div><%= @kalendar.days_in_next_month %></div>
-</div>
-<div>============================</div>
-<div>
-  <div
-    phx-click="next_month"
-    phx-value-month="<%= @kalendar.month_number %>"
-    phx-value-year="<%= @kalendar.year %>"
-    phx-value-day="<%= @kalendar.day %>"
-    phx-target="<%= @myself %>"
-  >
-    NEXT
+<div class="card sideKalendar">
+  <div class="card-header">
+    <div class="float-left">
+      <%= @kalendar.month %> <%= @kalendar.year %>
+    </div>
+    <div class="float-right">
+      <button
+        type="button"
+        class="btn btn-primary bmd-btn-icon"
+        phx-click="prev_month"
+        phx-value-month="<%= @kalendar.month_number_prev %>"
+        phx-value-year="<%= @kalendar.year %>"
+        phx-value-day="<%= @kalendar.day %>"
+        phx-value-days_in_prev_month="<%= @kalendar.days_in_prev_month %>"
+        phx-target="<%= @myself %>"
+        title="Previous month"
+      >
+        <i class="material-icons">keyboard_arrow_left</i>
+      </button>
+      <button
+        phx-click="next_month"
+        phx-value-month="<%= @kalendar.month_number_next %>"
+        phx-value-year="<%= @kalendar.year %>"
+        phx-value-day="<%= @kalendar.day %>"
+        phx-value-days_in_next_month="<%= @kalendar.days_in_next_month %>"
+        phx-target="<%= @myself %>"
+        title="Next month"
+        type="button"
+        class="btn btn-primary bmd-btn-icon"
+      >
+        <i class="material-icons">keyboard_arrow_right</i>
+      </button>
+    </div>
   </div>
-  <div phx-click="prev_month" phx-value-month="<%= @kalendar.month %>" phx-target="<%= @myself %>">PREV</div>
+  <div class="card-body">
+    <div class="card-title">
+      <small class="text-muted weekday-head">S</small>
+      <small class="text-muted weekday-head">M</small>
+      <small class="text-muted weekday-head">T</small>
+      <small class="text-muted weekday-head">W</small>
+      <small class="text-muted weekday-head">T</small>
+      <small class="text-muted weekday-head">F</small>
+      <small class="text-muted weekday-head">S</small>
+    </div>
+    <div class="card-text">
+      <%= for day <- @kalendar.full_calendar do %>
+        <small
+          class="<%= day.class %> weekday"
+        >
+          <%= day.day %>
+        </small>
+      <% end %>
+    </div>
+  </div>
 </div>

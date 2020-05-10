@@ -17,6 +17,14 @@ import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
 
+
+// import $ from "jquery";
+// import Popper from "popper.js";
+
+import "bootstrap-material-design"
+
+// import 'bootstrap-material-design/dist/js/bootstrap-material-design.js'
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
 
@@ -31,3 +39,12 @@ liveSocket.connect()
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)
 window.liveSocket = liveSocket
+
+// $(function () {
+//   $("[data-toggle=tooltip").tooltip();
+// })
+
+
+// $(document).ready(function() {
+//   $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+// });
