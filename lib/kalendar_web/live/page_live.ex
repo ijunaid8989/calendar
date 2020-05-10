@@ -34,42 +34,25 @@ defmodule KalendarWeb.PageLive do
     month_start_day = Calendar.Strftime.strftime!(month_start, "%A")
     month_end_day = Calendar.Strftime.strftime!(month_end, "%A")
     current_day = Calendar.Strftime.strftime!(date, "%d")
+    current_month = Calendar.Strftime.strftime!(date, "%B")
     how_far_is_sunday = Enum.find_index(days_sequence, fn day -> day == month_start_day end)
     how_far_is_saturday = Enum.find_index(days_sequence, fn day -> day == month_end_day end)
 
-    starting_dates =
-      discover_starting_dates(how_far_is_sunday, month_start)
-      |> Enum.sort(&(&1 < &2))
-      |> Enum.map(fn date ->
-        %{
-          day: Calendar.Strftime.strftime!(date, "%d"),
-          class: "text-muted",
-          bold: false,
-          current_day: false
-        }
-      end)
-    ending_dates =
-      discover_ending_dates(how_far_is_saturday, month_end)
-      |> Enum.map(fn date ->
-        %{
-          day: Calendar.Strftime.strftime!(date, "%d"),
-          class: "text-muted",
-          bold: false,
-          current_day: false
-        }
-      end)
-    month_dates =
-      discover_month_dates(month_start, days_in_month)
-      |> Enum.map(fn date ->
-        %{
-          day: Calendar.Strftime.strftime!(date, "%d"),
-          class: "bold",
-          bold: true,
-          current_day: (if current_day == Calendar.Strftime.strftime!(date, "%d"), do: true, else: false)
-        }
-      end)
+    starting_dates = discover_starting_dates(how_far_is_sunday, month_start) |> Enum.sort(&(&1 < &2)) |> format_calendar(current_month, current_day)
+    ending_dates = discover_ending_dates(how_far_is_saturday, month_end)  |> format_calendar(current_month, current_day)
+    month_dates = discover_month_dates(month_start, days_in_month) |> format_calendar(current_month, current_day)
 
     starting_dates ++ month_dates ++ ending_dates
+  end
+
+  defp format_calendar(dates, current_month, current_day) do
+   Enum.map(dates, fn date ->
+      %{
+        day: Calendar.Strftime.strftime!(date, "%d"),
+        class: (if current_month == Calendar.Strftime.strftime!(date, "%B"), do: "bold", else: "text-muted"),
+        current_day: (if current_day == Calendar.Strftime.strftime!(date, "%d"), do: true, else: false)
+      }
+    end)
   end
 
   defp discover_starting_dates(0, _month_start), do: []
