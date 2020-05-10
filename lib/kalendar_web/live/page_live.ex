@@ -64,9 +64,9 @@ defmodule KalendarWeb.PageLive do
       %{
         day: Calendar.Strftime.strftime!(date, "%d"),
         class: (if current_month == Calendar.Strftime.strftime!(date, "%B"), do: "in-month", else: "text-muted"),
-        current: (if today_day == Calendar.Strftime.strftime!(date, "%d") && today_month == Calendar.Strftime.strftime!(date, "%B"), do: "current", else: "")
+        current: (if today_day == Calendar.Strftime.strftime!(date, "%d") && today_month == Calendar.Strftime.strftime!(date, "%B"), do: "current", else: "weekday")
       }
-    end)
+    end) 
   end
 
   defp discover_starting_dates(0, _month_start), do: []

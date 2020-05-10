@@ -39,8 +39,14 @@
   text-align: center;
   line-height: 24px;
   margin: 0px 3.25px;
+  cursor: pointer;
   float: left;
   transition: background-color 100ms linear;
+}
+
+.sideKalendar .weekday:hover {
+  background-color: #dadce0;
+  border-radius: 50%;
 }
 
 .sidebar {
@@ -59,4 +65,13 @@
   background-color: #1a73e8;
   color: #fff;
   border-radius: 50%;
+  font-size: 10px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  margin: 0px 3.25px;
+  cursor: pointer;
+  float: left;
+  transition: background-color 100ms linear;
 }

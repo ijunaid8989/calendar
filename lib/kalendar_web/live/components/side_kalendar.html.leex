@@ -44,9 +44,7 @@
     </div>
     <div class="card-text">
       <%= for day <- @kalendar.full_calendar do %>
-        <div
-          class="<%= day.class %> weekday <%= day.current %>"
-        >
+        <div class="<%= day.class %> <%= day.current %>">
           <%= day.day %>
         </div>
       <% end %>
