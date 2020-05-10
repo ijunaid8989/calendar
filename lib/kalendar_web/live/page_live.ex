@@ -38,18 +38,29 @@ defmodule KalendarWeb.PageLive do
     how_far_is_sunday = Enum.find_index(days_sequence, fn day -> day == month_start_day end)
     how_far_is_saturday = Enum.find_index(days_sequence, fn day -> day == month_end_day end)
 
-    starting_dates = discover_starting_dates(how_far_is_sunday, month_start) |> Enum.sort(&(&1 < &2)) |> format_calendar(current_month, current_day)
-    ending_dates = discover_ending_dates(how_far_is_saturday, month_end)  |> format_calendar(current_month, current_day)
-    month_dates = discover_month_dates(month_start, days_in_month) |> format_calendar(current_month, current_day)
+    starting_dates = discover_starting_dates(how_far_is_sunday, month_start)
+    ending_dates = discover_ending_dates(how_far_is_saturday, month_end)
+    month_dates = discover_month_dates(month_start, days_in_month)
 
-    starting_dates ++ month_dates ++ ending_dates
+    adds_up = Enum.count(starting_dates) + Enum.count(ending_dates) + Enum.count(month_dates) |> need_adds_up(ending_dates)
+
+    starting_dates ++ month_dates ++ ending_dates ++ adds_up
+    |> format_calendar(current_month, current_day)
+  end
+
+  defp need_adds_up(42, _ending_dates), do: []
+  defp need_adds_up(count, ending_dates) do
+    start_with = ending_dates |> List.last
+    for i <- 1..(42 - count) do
+      Calendar.DateTime.add!(start_with, 86400 * i)
+    end
   end
 
   defp format_calendar(dates, current_month, current_day) do
    Enum.map(dates, fn date ->
       %{
         day: Calendar.Strftime.strftime!(date, "%d"),
-        class: (if current_month == Calendar.Strftime.strftime!(date, "%B"), do: "bold", else: "text-muted"),
+        class: (if current_month == Calendar.Strftime.strftime!(date, "%B"), do: "in-month", else: "text-muted"),
         current_day: (if current_day == Calendar.Strftime.strftime!(date, "%d"), do: true, else: false)
       }
     end)
@@ -60,7 +71,7 @@ defmodule KalendarWeb.PageLive do
   defp discover_starting_dates(index, month_start) do
     for i <- 1..index do
       Calendar.DateTime.subtract!(month_start, 86400 * i)
-    end
+    end |> Enum.sort(&(&1 < &2))
   end
 
   defp discover_ending_dates(7, _month_end), do: []

@@ -6,7 +6,7 @@
 
 
 .sideKalendar {
-  width: 260px;
+  width: 270px;
 }
 
 .sideKalendar .float-left {
@@ -34,8 +34,10 @@
 
 .sideKalendar .weekday {
   font-size: 12px;
-  margin: 0px 9px;
-  padding: 0.5px;
+  width: 26px;
+  height: 35px;
+  margin-left: 10px;
+  float: left;
 }
 
 .sidebar {
@@ -44,4 +46,8 @@
 
 .full-container {
   width: calc(100% - 300px);
+}
+
+.in-month {
+  font-weight: 500;
 }
