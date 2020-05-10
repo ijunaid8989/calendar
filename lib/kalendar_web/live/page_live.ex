@@ -45,7 +45,7 @@ defmodule KalendarWeb.PageLive do
     adds_up = Enum.count(starting_dates) + Enum.count(ending_dates) + Enum.count(month_dates) |> need_adds_up(ending_dates)
 
     starting_dates ++ month_dates ++ ending_dates ++ adds_up
-    |> format_calendar(current_month, current_day)
+    |> format_calendar(current_month)
   end
 
   defp need_adds_up(42, _ending_dates), do: []
@@ -56,12 +56,15 @@ defmodule KalendarWeb.PageLive do
     end
   end
 
-  defp format_calendar(dates, current_month, current_day) do
+  defp format_calendar(dates, current_month) do
+   today_month = Calendar.Strftime.strftime!(Calendar.DateTime.now_utc, "%B")
+   today_day = Calendar.Strftime.strftime!(Calendar.DateTime.now_utc, "%d")
    Enum.map(dates, fn date ->
+      IO.inspect date
       %{
         day: Calendar.Strftime.strftime!(date, "%d"),
         class: (if current_month == Calendar.Strftime.strftime!(date, "%B"), do: "in-month", else: "text-muted"),
-        current: (if current_day == Calendar.Strftime.strftime!(date, "%d") && current_month == Calendar.Strftime.strftime!(date, "%B"), do: "current", else: "")
+        current: (if today_day == Calendar.Strftime.strftime!(date, "%d") && today_month == Calendar.Strftime.strftime!(date, "%B"), do: "current", else: "")
       }
     end)
   end
