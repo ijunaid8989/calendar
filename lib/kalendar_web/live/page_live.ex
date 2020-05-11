@@ -10,8 +10,8 @@ defmodule KalendarWeb.PageLive do
     %{day: day, month: month, year: year} = date
     days_in_next_month = if month + 1 > 12, do: Timex.days_in_month(year, 1), else: Timex.days_in_month(year, (month + 1))
     days_in_prev_month = if month - 1 < 1, do: Timex.days_in_month(year, 1), else: Timex.days_in_month(year, (month - 1))
-    month_next = if month + 1 > 12, do: 12, else: month
-    month_prev = if month - 1 < 1, do: 1, else: month
+    month_next = if month + 1 > 12, do: 12, else: month + 1
+    month_prev = if month - 1 < 1, do: 1, else: month - 1
     %{
       month: Timex.month_name(month),
       year: year,

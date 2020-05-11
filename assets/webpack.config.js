@@ -45,11 +45,6 @@ module.exports = (env, options) => {
       ]
     },
     plugins: [
-      new webpack.ProvidePlugin({ // inject ES5 modules as global vars
-        $: 'jquery',
-        jQuery: 'jquery', 'window.jQuery': 'jquery',
-        Popper: "popper.js/dist/umd/popper.js"
-      }),
       new MiniCssExtractPlugin({ filename: '../css/app.css' }),
       new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
     ]
